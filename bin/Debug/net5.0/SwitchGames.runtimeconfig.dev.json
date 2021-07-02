@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/andy_atari/.dotnet/store/|arch|/|tfm|",
+      "/home/andy_atari/.nuget/packages"
+    ]
+  }
+}
