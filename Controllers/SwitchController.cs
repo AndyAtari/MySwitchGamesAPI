@@ -18,7 +18,15 @@ namespace SwitchGames.Controllers
         public ActionResult<List<Switch>> GetAll() =>
             SwitchService.GetAll(); 
 
-        // GET by Id action
+        [HttpGet("{id}")]
+        public ActionResult<Switch> Get(int id) {
+            var game = SwitchService.Get(id);
+
+            if(game == null)
+                return NotFound();
+
+            return game;
+        }
 
         // POST action
 
