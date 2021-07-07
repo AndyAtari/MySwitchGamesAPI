@@ -36,16 +36,32 @@ namespace SwitchGames.Controllers
             return CreatedAtAction(nameof(Create), new { id = game.Id }, game);
         }
 
-        // [HttpPut("{id}")]
-        // public IActionResult Update(int id, Pizza pizza)
-        // {
-        //     // This code will update the pizza and return a result
-        // }
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, Switch game)
+        {
+            if (id != game.Id)
+                return BadRequest();
 
-        // [HttpDelete("{id}")]
-        // public IActionResult Delete(int id)
-        // {
-        //     // This code will delete the pizza and return a result
-        // }
+            var existingGame = SwitchService.Get(id);
+            if (existingGame is null)
+                return NotFound();
+
+            SwitchService.Update(game);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var game = SwitchService.Get(id);
+
+            if (game is null)
+                return NotFound();
+
+            SwitchService.Delete(id);
+
+            return NoContent();
+        }
     }
 }
