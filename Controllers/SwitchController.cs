@@ -16,22 +16,36 @@ namespace SwitchGames.Controllers
 
         [HttpGet]
         public ActionResult<List<Switch>> GetAll() =>
-            SwitchService.GetAll(); 
+            SwitchService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<Switch> Get(int id) {
+        public ActionResult<Switch> Get(int id)
+        {
             var game = SwitchService.Get(id);
 
-            if(game == null)
+            if (game == null)
                 return NotFound();
 
             return game;
         }
 
-        // POST action
+        [HttpPost]
+        public IActionResult Create(Switch game)
+        {
+            SwitchService.Add(game);
+            return CreatedAtAction(nameof(Create), new { id = game.Id }, game);
+        }
 
-        // PUT action
+        // [HttpPut("{id}")]
+        // public IActionResult Update(int id, Pizza pizza)
+        // {
+        //     // This code will update the pizza and return a result
+        // }
 
-        // DELETE action
+        // [HttpDelete("{id}")]
+        // public IActionResult Delete(int id)
+        // {
+        //     // This code will delete the pizza and return a result
+        // }
     }
 }
